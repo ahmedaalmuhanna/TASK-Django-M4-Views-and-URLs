@@ -13,11 +13,19 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django import views
 from django.contrib import admin
 from django.urls import path
-from pokemon.views import get_pokemon
+from pokemon.views import get_pokemon, get_pokemons_list# PokeListApiView # 1. we can do this 
+from pokemon import views # 2. or this
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("pok/<int:pokemon_id>", get_pokemon),
+    path(" pokemons/list", get_pokemons_list),
+    # API PATH
+    path("pokeAPI/",views.PokeListApiView.as_view()) # if we use 1. we will type PokeListApiView 
+                                                    # instade of views.PokeListApiView
+                                           
 ]
